@@ -59,6 +59,8 @@ public final class FileUtils {
     public static File getConfigFile(String name) {
         File file = new File(String.format((String)"%s.json", (Object[])new Object[]{name}));
         if (!file.exists()) {
+            System.out.println("Do not find your data or data is free.");
+            System.exit(0);
             try {
                 file.createNewFile();
             }
