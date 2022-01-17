@@ -3,6 +3,8 @@ package waytner.json;
 
 
 
+import com.sun.corba.se.impl.orb.ParserTable;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.HttpsURLConnection;
@@ -22,21 +24,18 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
-    private static File FRIEND_DIR = FileUtils.getConfigFile("data2");
+    private static File FRIEND_DIR;
     public static int list = 0;
 
 
-    public static <Int> void main(String[] args) throws Exception {
-
-
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("________          __         ___________.__                     \n" +
                 "\\______ \\ _____ _/  |______  \\_   _____/|__|__  ___ ___________ \n" +
                 " |    |  \\\\__  \\\\   __\\__  \\  |    __)  |  \\  \\/  // __ \\_  __ \\\n" +
                 " |    `   \\/ __ \\|  |  / __ \\_|     \\   |  |>    <\\  ___/|  | \\/\n" +
                 "/_______  (____  /__| (____  /\\___  /   |__/__/\\_ \\\\___  >__|   \n" +
-                "        \\/     \\/          \\/     \\/             \\/    \\/          version 2.0 by waytner");
+                "        \\/     \\/          \\/     \\/             \\/    \\/          version 2.1 by waytner");
 
         System.out.println("welcome to datafixer");
         System.out.println("enter mode (now just one mode is active. It: 'datafix'):");
@@ -44,13 +43,13 @@ public class Main {
             String mode = scanner.nextLine();
             if (mode.equals("datafix")) {
                 System.out.println("WARNING: E.g if your json file name is: 'data.json' please enter this on command line: 'data' so delete dot json extension");
-                System.out.println("Enter json file path:");
+                System.out.println("Enter json file name:");
                 while (scanner.hasNextLine()) {
                     scanner.reset();
                     String scannerstring = scanner.nextLine();
                     if (!scannerstring.contains(".json")) {
-                        FRIEND_DIR = FileUtils.getConfigFile(scannerstring);
-                        List<String> fileContent = FileUtils.read(FRIEND_DIR);
+                        FRIEND_DIR = waytner.json.FileUtils.getConfigFile(scannerstring);
+                        List<String> fileContent = waytner.json.FileUtils.read(FRIEND_DIR);
                         for (String line : fileContent) {
                             Stream<String> file = Files.lines(Paths.get(scannerstring + ".json"));
                             System.out.println("enter your wanted limit (50000 = 20,25 mb data, 100000 recommened)");
@@ -62,8 +61,9 @@ public class Main {
                                 ilimit = scannerss;
                                 break;
                             }
+                            File fileqwe = new File(".");
                             System.out.println("Scan and write is started. If scanner do not writing any cc on command line with in 5 minutes, Please check your data or want help.");
-                            System.out.println("Check cclist.txt file. It on this path. (New feature)");
+                            System.out.println("Check cclist.txt file. It on this (" + fileqwe.getCanonicalPath() + ") path. (New feature)");
                             for (int i=0; i<ilimit; i++) {
                                 list++;
                                 try {

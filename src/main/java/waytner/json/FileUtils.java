@@ -35,26 +35,9 @@ public final class FileUtils {
         return readContent;
     }
 
-    public static void write(File outputFile, List<String> writeContent, boolean overrideContent) {
-        try {
-            BufferedWriter out = new BufferedWriter((Writer)new OutputStreamWriter((OutputStream)new FileOutputStream(outputFile), "UTF-8"));
-            for (String outputLine : writeContent) {
-                out.write(String.valueOf((Object)outputLine) + System.getProperty((String)"line.separator"));
-            }
-            out.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    public static File getConfigDir() {
-        File file = new File("C:\\", "SOI-Config");
-        if (!file.exists()) {
-            file.mkdir();
-        }
-        return file;
-    }
+
+
 
     public static File getConfigFile(String name) {
         File file = new File(String.format((String)"%s.json", (Object[])new Object[]{name}));
